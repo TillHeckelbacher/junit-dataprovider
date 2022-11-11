@@ -25,16 +25,12 @@ jobs:
       with:
         java-version: '8'
         distribution: 'temurin'
-    - name: Unit test with Gradle
-      uses: gradle/gradle-build-action@67421db6bd0bf253fb4bd25b31ebb98943c375e1
-      with:
-        arguments: clean test
-    - name: Integration test with Gradle
-      uses: gradle/gradle-build-action@67421db6bd0bf253fb4bd25b31ebb98943c375e1
-      with:
-        arguments: clean integTest
+    - name: Unit tests with Gradle
+      run: ./gradlew clean test
+    - name: Integration tests with Gradle
+      run: ./gradlew clean integTest
     - name: Publish Test Report
-      uses: mikepenz/action-junit-report@v3
-      if: always() # always run even if the previous step fails
+      uses: EnricoMi/publish-unit-test-result-action@v2
+      if: always()
       with:
-        report_paths: '**/build/test-results/test/*.xml'
+        junit_files: 'build/test-results/test/*.xml'
