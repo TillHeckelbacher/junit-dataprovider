@@ -9,10 +9,6 @@ name: JUnit-Tests_Exercise
 
 on:
   workflow_dispatch
-  push:
-    branches: [ "master" ]
-  pull_request:
-    branches: [ "master" ]
 
 permissions:
   contents: read
